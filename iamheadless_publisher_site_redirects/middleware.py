@@ -34,10 +34,10 @@ class IamheadlessPublisherSiteRedirectMiddleware(MiddlewareMixin):
                 project_id=settings.PROJECT_ID,
                 item_id=url,
                 lookup_field=f'text_lookup_indexes__field_name||source_url||{url}',
-                format='dict'
             )
 
             if item is not None:
+                item = item.dict()
                 cached_data = item['data']['destination_url']
             else:
                 cached_data = None

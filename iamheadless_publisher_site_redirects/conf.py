@@ -10,9 +10,19 @@ class Settings:
     APP_NAME = AppConfig.name
     VAR_PREFIX = APP_NAME.upper()
 
+    VAR_CHECK_REDIRECTS = f'{VAR_PREFIX}_CACHE_TIMEOUT_REDIRECTS'
+
     @property
     def API_CLIENT(self):
         return iamheadless_publisher_site_settings.API_CLIENT
+
+    @property
+    def CACHE_TIMEOUT_REDIRECTS(self):
+        return getattr(
+            dj_settings,
+            self.VAR_CHECK_REDIRECTS,
+            30
+        )
 
     @property
     def PROJECT_ID(self):
